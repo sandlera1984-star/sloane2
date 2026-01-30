@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-cream text-night;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top, rgba(248, 215, 232, 0.9), rgba(255, 247, 242, 0.7));
+}
+
+.card {
+  @apply bg-white/80 backdrop-blur rounded-3xl shadow-glow border border-white/60;
+}
+
+.button-primary {
+  @apply bg-plum text-white px-6 py-3 rounded-full font-semibold shadow-glow hover:bg-night transition;
+}
+
+.button-secondary {
+  @apply bg-rose/80 text-night px-6 py-3 rounded-full font-semibold hover:bg-rose transition;
+}
+
+.input {
+  @apply w-full rounded-2xl border border-rose/40 bg-white/80 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-plum/50;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-rose/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+}
