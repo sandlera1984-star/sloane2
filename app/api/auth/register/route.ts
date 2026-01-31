@@ -8,18 +8,12 @@ export async function POST(request: Request) {
   const {
     email,
     password,
-    stripeCustomerId,
-    stripeSubscriptionId,
-    subscriptionStatus,
   } = body as {
     email?: string;
     password?: string;
-    stripeCustomerId?: string;
-    stripeSubscriptionId?: string;
-    subscriptionStatus?: string;
   };
 
-  if (!email || !password || !stripeCustomerId || !stripeSubscriptionId) {
+  if (!email || !password) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -33,13 +27,6 @@ export async function POST(request: Request) {
     data: {
       email,
       passwordHash,
-      stripeCustomerId,
-      stripeSubscriptionId,
-      subscription: {
-        create: {
-          status: (subscriptionStatus as any) ?? "active",
-        },
-      },
       notificationPreference: {
         create: {
           optIn: true,

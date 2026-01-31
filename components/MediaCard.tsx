@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import UnderConstructionOverlay from "@/components/UnderConstructionOverlay";
+import { hasTermsConsent } from "@/lib/terms";
 
 interface MediaCardProps {
   id: string;
@@ -22,8 +25,10 @@ export default function MediaCard({
   publishedAt,
   canAccess,
 }: MediaCardProps) {
+  const router = useRouter();
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleAccess = async () => {
     if (!canAccess || mediaUrl) return;
@@ -61,9 +66,19 @@ export default function MediaCard({
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-night/50 text-white">
           <span className="badge bg-white/80 text-night">Locked</span>
           <p className="text-sm">Subscribe to unlock</p>
-          <a href="/pay" className="button-primary text-xs">
+          <button
+            type="button"
+            className="button-primary text-xs"
+            onClick={() => {
+              if (!hasTermsConsent()) {
+                router.push("/terms");
+                return;
+              }
+              setShowOverlay(true);
+            }}
+          >
             Subscribe now
-          </a>
+          </button>
         </div>
       )}
       <div className="mt-4 flex items-center justify-between">
@@ -96,6 +111,9 @@ export default function MediaCard({
           )}
         </div>
       )}
+      <UnderConstructionOverlay open={showOverlay} onClose={() => setShowOverlay(false)}>
+        Under Construction
+      </UnderConstructionOverlay>
     </div>
   );
 }

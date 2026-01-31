@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { getSessionUser, isSubscriptionActive } from "@/lib/auth";
 import NotificationToggle from "@/components/NotificationToggle";
+import UnderConstructionButton from "@/components/UnderConstructionButton";
 
 export const dynamic = "force-dynamic";
 
@@ -16,9 +16,12 @@ export default async function NotificationsPage() {
           <p className="mt-2 text-sm text-night/60">
             Notifications are available to active members.
           </p>
-          <Link href="/pay" className="button-primary mt-6 inline-flex">
-            Subscribe now
-          </Link>
+          <div className="mt-6 flex justify-center">
+            <UnderConstructionButton
+              label="Subscribe now"
+              className="button-primary inline-flex"
+            />
+          </div>
         </div>
       </main>
     );

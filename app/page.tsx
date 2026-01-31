@@ -1,7 +1,23 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import UnderConstructionOverlay from "@/components/UnderConstructionOverlay";
+import { hasTermsConsent } from "@/lib/terms";
 
 export default function Home() {
+  const router = useRouter();
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const handleButtonClick = () => {
+    if (!hasTermsConsent()) {
+      router.push("/terms");
+      return;
+    }
+    setShowOverlay(true);
+  };
+
   return (
     <main className="hero-gradient">
       <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-16">
@@ -15,6 +31,7 @@ export default function Home() {
           />
         </div>
         <div className="flex flex-col items-center gap-6 text-center">
+          <h2 className="text-5xl font-bold text-rose md:text-6xl">SloaneX</h2>
           <div className="relative h-36 w-36 overflow-hidden rounded-full border-8 border-white shadow-glow">
             <Image
               src="/profile-placeholder.svg"
@@ -29,21 +46,24 @@ export default function Home() {
               Join the Sloane Collective
             </h1>
             <p className="max-w-2xl text-base text-night/70">
-              Subscribe for a curated vault of premium photos and cinematic videos. Your
-              membership unlocks private drops, behind-the-scenes shoots, and bespoke
-              notifications for every new release.
+              Explore a curated vault of premium photos and cinematic videos. Member access
+              unlocks private drops, behind-the-scenes shoots, and bespoke notifications for
+              every new release.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/pay" className="button-primary">
+            <button type="button" className="button-primary" onClick={handleButtonClick}>
               Sign Up
-            </Link>
-            <Link href="/login" className="button-secondary">
+            </button>
+            <button type="button" className="button-secondary" onClick={handleButtonClick}>
               Login
-            </Link>
+            </button>
           </div>
         </div>
       </section>
+      <UnderConstructionOverlay open={showOverlay} onClose={() => setShowOverlay(false)}>
+        Under Construction
+      </UnderConstructionOverlay>
     </main>
   );
 }

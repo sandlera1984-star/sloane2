@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getSessionUser, isSubscriptionActive } from "@/lib/auth";
 import MemberSidebar from "@/components/MemberSidebar";
-import CancelSubscriptionButton from "@/components/CancelSubscriptionButton";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +32,9 @@ export default async function SubscriptionPage() {
         <p className="mt-2 text-sm text-night/60">
           Access: {active ? "Active" : "Inactive"}
         </p>
-        <CancelSubscriptionButton />
+        <p className="mt-4 text-sm text-night/60">
+          Subscription management is currently under construction.
+        </p>
       </div>
     </main>
   );

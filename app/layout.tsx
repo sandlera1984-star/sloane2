@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Sloane Collective",
-  description: "Exclusive fashion-forward media behind a subscription paywall.",
+  description: "Exclusive fashion-forward media with member-only access.",
 };
 
 export default function RootLayout({
