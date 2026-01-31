@@ -14,7 +14,7 @@ A production-ready Next.js 15 subscription platform for exclusive photo/video co
 
 ## Requirements
 
-- Node.js **20.x**
+- Node.js **20.18.0**
 - Postgres database
 - Resend and Vercel Blob credentials
 
